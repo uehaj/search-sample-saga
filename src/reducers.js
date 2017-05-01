@@ -1,10 +1,10 @@
 // reducer.js
 import { LOAD_RESULT, CHANGE_INPUT } from './actions';
 
-const result = (state = [], action ) => {
+const result = (state = [], action) => {
   switch(action.type){
   case LOAD_RESULT:
-    return action.payload;
+    return action.payload ? action.payload : [];
   default:
     return state;
   }

@@ -1,10 +1,11 @@
-import { race, take, put, call, fork, join, cancel, takeEvery, takeLatest, delay, select } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
+import { put, call, takeLatest, select } from 'redux-saga/effects';
 import { CHANGE_INPUT, loadResult } from './actions';
 import { searchApi } from './api';
 
 function* changeInput() {
+  yield delay(400);
   const word = yield select(state => { return state.word; });
-  console.log(word);
   const json = yield call(searchApi, word);
   yield put(loadResult(json));
 }

@@ -10,7 +10,7 @@ const SearchPedia = ({ word, result, changeInput }) => {
       <input value={ word } onChange={ e => changeInput(e.target.value)} />
       <h3>Result</h3>
       <ul>
-        {result.map( (r, i) => <li key={i}>{r}</li>)}
+        {result.map( (r, i) => <li key={r}>{r}</li>)}
       </ul>
     </div>
   );

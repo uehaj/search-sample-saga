@@ -1,21 +1,38 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
+import { configureStore } from './store';
+import { changeInput } from './actions';
 
-class App extends Component {
-  render() {
+const SearchPedia = ({ word, result, changeInput }) => {
+  return (
+    <div>
+      <input value={ word } onChange={ e => changeInput(e.target.value)} />
+      <h3>Result</h3>
+      <ul>
+        {result.map( (r, i) => <li key={i}>{r}</li>)}
+      </ul>
+    </div>
+  );
+};
+
+// Container
+const SearchPediaContainer = connect(
+  state => state,
+  { changeInput }
+)(SearchPedia);
+
+// Provider
+export default class App extends React.Component {
+  constructor(){
+    super();
+    this.store = configureStore();
+  }
+  render(){
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Provider store={this.store} >
+        <SearchPediaContainer />
+      </Provider>
     );
   }
-}
-
-export default App;
+};
